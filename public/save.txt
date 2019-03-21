@@ -1,0 +1,13 @@
+"trxid": "16110413103",
+"code": "I5",
+"phone": "085727700650",
+"idcust": "", <= id pelanggan jika trx PLN Token
+"sequence": "1", <= urutan transaksi ke berapa untuk kode dan nohp yg sama dlm sehari
+"status": 4, <= 2:Gagal, 3:Refund, 4:Sukses
+"sn": "243023159",
+"note": "Trx sukses",
+"price": "5575",
+"trxid_api": "xxxxx", <= trxid/reffid dari client
+"date_insert": "2016-11-04 19:43:18", <= Tgl Transaksi
+"date_update": "2016-11-04 19:43:38", <= Tgl Update Terakhir
+"last_balance": "1582820", <= Saldo Terakhir
