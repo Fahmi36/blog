@@ -174,9 +174,7 @@ class Proses extends Controller
 	}
 	public function deposit()
 	{
-		if(!empty(Session::get('user'))){
 			$rules = [
-				'bank' => 'required',
 				'Nominal' => 'required',
 				'nama'=> 'required',
 			];
@@ -187,17 +185,13 @@ class Proses extends Controller
 				->with('message','Ada Data Yang Kosong')
 				->with('status','danger');
 			}else{
-				$url = file_get_contents("https://free.currencyconverterapi.com/api/v6/convert?q=USD_IDR&compact=ultra");
-				$result = json_decode($url, True);
+				// $url = file_get_contents("https://free.currencyconverterapi.com/api/v6/convert?q=USD_IDR&compact=ultra");
+				// $result = json_decode($url, True);
 
 				$input = Input::all();
 				$tambah = new Topup();
 				$tambah->id_users = Session::get('user')->id_user;
 				$tambah->harga = $input['Nominal'];
-				if ($input['bank']=='Paypal') {
-					$tambah->usd = $input['Nominal'] / $result['USD_IDR'];
-				}
-				$tambah->nama_bank = $input['bank'];
 				$tambah->nama = $input['nama'];
 				$tambah->expired = date("Y-m-d", time() + 86400);
 				$tambah->tanggal = date('Y-m-d');
@@ -223,11 +217,8 @@ class Proses extends Controller
 				$tambah->snap_token = $snapToken;
 				$tambah->save();
             	$this->response['snap_token'] = $snapToken;
-				return response()->json($snapToken);
+				return response()->json($this->response);
 			}
-		}else{
-			return redirect('/login');
-		}
 	}
 	public function notificationHandler(Request $request)
 	{

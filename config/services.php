@@ -35,11 +35,8 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
     'midtrans' => [
-        // Midtrans server key
-        'serverKey'     => env('SB-Mid-server-sIndQBVZoH4uwnM_qD-m9u6T'),
-        // Midtrans client key
-        'clientKey'     => env('SB-Mid-client-X0xcKcMd6eTP5FMf'),
-        // Isi false jika masih tahap development dan true jika sudah di production, default false (development)
+        'serverKey'     => env('SB-Mid-server-_VeQ7PmSXLcpSrit4xeWhMdn'),
+        'clientKey'     => env('SB-Mid-client-bCKoi6zmoDIq5PeX'),
         'isProduction'  => env('MIDTRANS_IS_PRODUCTION', false),
         'isSanitized'   => env('MIDTRANS_IS_SANITIZED', true),
         'is3ds'         => env('MIDTRANS_IS_3DS', true),                

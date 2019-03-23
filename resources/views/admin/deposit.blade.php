@@ -136,7 +136,7 @@
 <script type="text/javascript" src="{{asset('/js/jq.js')}}"></script>
 <script src="{{asset('/js/jquery-ui.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.serializeJSON/2.9.0/jquery.serializejson.min.js"></script>
-<script src="{{ !config('services.midtrans.isProduction') ? 'https://app.sandbox.midtrans.com/snap/snap.js' : 'https://app.midtrans.com/snap/snap.js' }}" data-client-key="SB-Mid-client-X0xcKcMd6eTP5FMf"></script>
+<script src="{{ !config('services.midtrans.isProduction') ? 'https://app.sandbox.midtrans.com/snap/snap.js' : 'https://app.midtrans.com/snap/snap.js' }}" data-client-key="{{ config('services.midtrans.clientKey') }}"></script>
 <script type="text/javascript">
  $("#Pembayaran").submit(function (event) {
   var data = new FormData($(this)[0]);
@@ -149,21 +149,21 @@
     processData: false,
     headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'},
     success: function (response) {
-      console.log(response);
-    //   snap.pay(response.snap_token, {
-    //             // Optional
-    //             onSuccess: function (result) {
-    //               location.reload();
-    //             },
-    //             // Optional
-    //             onPending: function (result) {
-    //               location.reload();
-    //             },
-    //             // Optional
-    //             onError: function (result) {
-    //               location.reload();
-    //             }
-    //           });
+      console.log(response.snap_token);
+      snap.pay(response.snap_token, {
+                // Optional
+                onSuccess: function (result) {
+                  console.log(result);
+                },
+                // Optional
+                onPending: function (result) {
+                  console.log(result);
+                },
+                // Optional
+                onError: function (result) {
+                  console.log(result);
+                }
+              });
   },
     error: function () {
       alert('Eror');

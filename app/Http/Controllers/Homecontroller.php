@@ -19,9 +19,22 @@ use App\Produk;
 use App\topup;
 use App\Http\Controllers\Controller;
 use DateTime;
+use Veritrans_Config;
 
 class Homecontroller extends Controller
 {
+	protected $request;
+
+	public function __construct(Request $request)
+	{
+		$this->request = $request;
+
+        // Set midtrans configuration
+		Veritrans_Config::$serverKey = config('services.midtrans.serverKey');
+		Veritrans_Config::$isProduction = config('services.midtrans.isProduction');
+		Veritrans_Config::$isSanitized = config('services.midtrans.isSanitized');
+		Veritrans_Config::$is3ds = config('services.midtrans.is3ds');
+	}
 	public function beli($link)
 	{
 		if(!empty(Session::get('user'))){
